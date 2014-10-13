@@ -10,8 +10,10 @@ namespace Caritas.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
+        
+        
 
         protected override void Seed(Caritas.Models.ApplicationDbContext context)
         {
