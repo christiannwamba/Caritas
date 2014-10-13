@@ -1,0 +1,35 @@
+﻿@model Caritas.Models.Content
+@{
+    ViewBag.Title = "Courses";
+}
+<script src="~/Controllers/CourseApp.js"></script>
+<div class="container" ng-app="CourseApp" ng-controller="CourseCtrl">
+    <h3>Available <span style="color:#D0040f">Courses</span></h3>
+    <hr />
+    <div class="col-md-3">
+        <accordion close-others="true">
+            <accordion-group is-open="status.open" ng-repeat="f in faculties">
+                <accordion-heading>
+                    <div ng-click="getDepts(f.FacultyID)">
+                        {{f.FacultyName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </div>
+                </accordion-heading>
+                <ul style="list-style-type:disc">
+                    <li ng-repeat="d in depts">
+                        <a ng-href="#" ng-click="getDesc(d.DepartmentID)">
+                            {{d.DepartmentName}}<br />
+                        </a>
+                    </li>
+                </ul>
+            </accordion-group>
+        </accordion>
+    </div>
+    <div class="col-md-9">
+        <div ng-bind-html="desc">
+
+        </div>
+    </div>
+</div>
+<script>
+    $("#CoursesLink").addClass("active");
+</script>

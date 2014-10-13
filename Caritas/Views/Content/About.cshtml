@@ -1,0 +1,12 @@
+﻿@model Caritas.Models.Content
+@{
+    ViewBag.Title = "About";
+}
+<div class="container">
+    <h3>About <span style="color:#D0040f">Caritas University</span></h3>
+    <hr />
+    @Html.Raw(Model.Content1)
+</div>
+<script>
+    $("#AboutLink").addClass("active");
+</script>

@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Publications";
+}
+<script src="~/Controllers/PubApp.js"></script>
+<div class="container" ng-app="PubApp" ng-controller="PubCtrl">
+    <h3>Publications</h3>
+    <div class="pull-right">
+        <input type="text" class="form-control input-sm" ng-model="SearchPub" placeholder="Search Pubs" />
+    </div>
+    <hr />
+    <div class="table-responsive" ng-show="SearchPub">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        Projects
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in pubs">
+                    <td>
+                        {{p}}
+                    </td>
+                    <td>
+                        <a href="~/Publication/DowloadProject?id={{p}}"><span class="glyphicon glyphicon-download-alt"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="container_id" ng-hide="SearchPub">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#container_id').fileTree({
+            root: '/App_Data/Uploads/Projects/',
+            script: 'jqueryFileTree.aspx',
+            expandSpeed: 1000,
+            collapseSpeed: 1000,
+            multiFolder: false
+        }, function (file) {
+            var href = file;
+            var lstPt = href.substr(href.lastIndexOf('/') + 1);
+           window.location.href = "/Publication/DowloadProject?id="+lstPt;
+        });
+    });
+</script>

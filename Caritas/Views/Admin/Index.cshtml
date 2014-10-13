@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h3 class="container">Admin Dashboard</h3>
+<hr />
+<div class="container metro">
+    <div class="col-md-5 col-md-offset-4">
+        <button class="shortcut primary" onclick="goTo('/Admin/ManageNews')">
+            <i class="glyphicon glyphicon-th-large"></i>
+            News
+        </button>
+        <button class="shortcut info" onclick="goTo('/Admin/ManageEvents')">
+            <i class="glyphicon glyphicon-th-large"></i>
+            Events
+        </button>
+        <button class="shortcut success" onclick="goTo('/Admin/ManageCourses')">
+            <i class="glyphicon glyphicon-th-large"></i>
+            Courses
+        </button>
+        <button class="shortcut danger" onclick="goTo('/Admin/ManageProjects')">
+            <i class="glyphicon glyphicon-th-large"></i>
+            Project
+        </button>
+    </div>
+    
+    <div style="margin-top:20px" class="col-md-5 col-md-offset-4">
+        <button class="shortcut warning">
+            <i class="glyphicon glyphicon-th-large"></i>
+            Blog
+        </button>
+        <button class="shortcut danger">
+            <i class="glyphicon glyphicon-th-large"></i>
+            Forums
+        </button>
+        <button class="shortcut primary">
+            <i class="glyphicon glyphicon-th-large"></i>
+            Journals
+        </button>
+        <button class="shortcut default" onclick="goTo('/Admin/ManageContents')">
+            <i class="glyphicon glyphicon-th-large"></i>
+            Content
+        </button>
+    </div>
+</div>
+
+<script>
+    function goTo(loca) {
+        window.location = loca;
+    }
+</script>

@@ -1,0 +1,11 @@
+﻿@model Caritas.Models.Event
+@{
+    ViewBag.Title = Model.Title;
+}
+<div class="container">
+    <h3>Event: <span style="color:#d0040f">@Model.Title</span></h3>
+    <hr />
+    @Html.Raw(Model.Event1)
+    <hr />
+    <span class="glyphicon glyphicon-time"></span>&nbsp;Event Date: <span class="text-bold text-primary">@Model.EventDate.ToShortDateString()</span>
+</div>

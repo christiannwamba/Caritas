@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Manage Events";
+}
+<div class="container" ng-app="AdminApp" ng-controller="EventsCtrl">
+    <a href="~/Admin"><span style="font-size:40px" class="glyphicon glyphicon-arrow-left"></span></a>
+    <h3>Manage Events</h3>
+    <hr />
+    <section class="col-md-8">
+        <form name="frm">
+            <input type="hidden" ng-model="eventId" />
+            <input type="hidden" value="@User.Identity.GetUserId()" id="UserId" />
+            <div class="form-group">
+                <label class="control-label">Title</label>
+                <input type="text" ng-model="title" name="title" class="form-control" required />
+                <span ng-show="frm.title.$dirty && frm.title.$error.required">Title is required</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Event Date</label>
+                    <input type="date" class="form-control"  ng-model="eventDate" required/>
+                <span ng-show="frm.title.$dirty && frm.title.$error.required">Title is required</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Body</label>
+                <textarea name="body" class="form-control" ui-tinymce="tinymceOptions" ng-model="body" required></textarea>
+                <span ng-show="frm.body.$dirty && frm.body.$error.required">Event Body is required</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Caption</label>
+                <textarea name="caption" class="form-control" ng-model="caption" maxlength="100" required></textarea>
+                <span ng-show="frm.caption.$dirty && frm.caption.$error.required">News Caption is required</span>
+                <span ng-show="frm.caption.$dirty && frm.caption.$error.maxlength">Event Caption cannot be more than 100 characters</span>
+            </div>
+            <div class="form-group pull-right">
+                <button ng-hide="eventId" type="button" ng-disabled="frm.$invalid" class="btn btn-success" ng-click="createEvent()">Add</button>
+                <div ng-show="eventId" class="btn-group">
+                    <button type="button" ng-disabled="frm.$invalid" class="btn btn-primary" ng-click="updateEvent()">Update</button>
+                    <button type="button" ng-disabled="frm.$invalid" class="btn btn-danger" ng-click="deleteEvent(eventId)">Delete</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="col-md-4">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Latest</div>
+            <table class="table">
+                <thead>
+                    <tr style="font-weight:bold">
+                        <td>News</td>
+                        <td>By</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="l in latestEvents">
+                        <td>{{l.Title}}</td>
+                        <td>{{l.FirstName + ' ' + l.LastName}}</td>
+                        <td>{{formatJsonDate(l.DateAdded)}}</td>
+                        <td><a ng-show="l.UserID == userid" ng-href="" class="btn" ng-click="getEventForUpdate(l.EventID)"><span class="glyphicon glyphicon-edit"></span>/<span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

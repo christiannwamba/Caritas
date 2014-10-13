@@ -1,0 +1,146 @@
+﻿@model Caritas.ViewModel.HomeViewModel
+@{
+    //ViewBag.IPAddress = Request.ServerVariables["REMOTE_ADDR"].ToString();
+    ViewBag.Title = "Welcome";
+}
+<style>
+    #News a:hover {
+        text-decoration:none;
+    }
+</style>
+
+<script src="~/Controllers/HomeApp.js"></script>
+<div class="container" ng-app="HomeApp" ng-controller="HomeCtrl">
+    <div class="col-md-9">
+        <section id="carousel">
+            <div>
+                <carousel interval="5000">
+                    <slide active="slide.active">
+                        <img ng-src="/Images/carousel1.fw.png" style="margin:auto;">
+                        <div class="carousel-caption">
+                            <h4>JJJ</h4>
+                            <p>kk</p>
+                        </div>
+                    </slide>
+                    <slide>
+                        <img ng-src="/Images/carousel2.fw.png" style="margin:auto;">
+                        <div class="carousel-caption">
+                            <h4>JJJ</h4>
+                            <p>kk</p>
+                        </div>
+                    </slide>
+                    <slide>
+                        <img ng-src="/Images/carousel3.fw.png" style="margin:auto;">
+                        <div class="carousel-caption">
+                            <h4>JJJ</h4>
+                            <p>kk</p>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+        </section>
+        <section style="margin-top:30px">
+            <section class="col-md-5" id="Events">
+                <div class="panel panel-danger">
+                    <div class="panel-heading" style="background: url('/Images/dark-logo-bg.png');">Entry Requirements</div>
+                    <div class="panel-body">
+                        @foreach (var m in Model.EntryRequirements) { 
+                        <span>@Html.Raw(m.Content1)</span>
+                        }
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-7" id="Welcome">
+                <div class="panel panel-danger">
+                    <div class="panel-heading" style="background: url('/Images/dark-logo-bg.png');">Welcome</div>
+                    <div class="panel-body">
+                        @foreach (var m in Model.Welcome)
+                        {
+                            <span>@Html.Raw(m.Content1)</span>
+                        }
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section id="Events" class="col-md-12">
+            <div class="panel panel-danger">
+                <div class="panel-heading">Events</div>
+                <div class="panel-body">
+                    <div class="col-md-12" style="padding:0;">
+                        <div>
+                            <carousel interval="5000">
+                                <slide ng-repeat="e in events">
+                                    <a ng-href="~/Content/Event/{{e.EventID}}">
+                                        <img ng-src="/Images/events1.fw.png" style="margin:auto;">
+                                        <div class="carousel-caption">
+                                            <h4 style="color:whitesmoke" class="text-capitalize">{{formatJsonDate(e.EventDate) + ': '}}<br /> {{e.Title}}</h4>
+                                            <p>{{e.Caption}}</p>
+                                        </div>
+                                    </a>
+                                </slide>
+                            </carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="Social">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Facebook</div>
+                    <div class="panel-body">
+
+                        <div class="fb-like-box" data-href="https://www.facebook.com/CaritasUniversity" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Twitter</div>
+                    <div class="panel-body">
+                        <a class="twitter-timeline" href="https://twitter.com/chrisnwamba92" data-widget-id="517393371451494400">Tweets by @@chrisnwamba92</a>
+                        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-danger" id="News">
+            <div class="panel-heading" style="background: url('/Images/dark-logo-bg.png');">News</div>
+            <div class="panel-body">
+                <div ng-repeat="n in news">
+                    <a ng-href="~/Content/News/{{n.NewsID}}"><span style="color:#D0040f; font-weight:bold; font-size:16px">{{n.Title}}</span></a>
+                    <p><i style="color:#023502;text-transform:fullsize-kana"><i class="glyphicon glyphicon-time momentDate"></i>&nbsp;{{formatJsonDate(n.DateAdded)}} </i><br />{{n.Caption}}</p>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-danger">
+            <div class="panel-heading" style="background: url('/Images/dark-logo-bg.png');">Featured Projects</div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading" style="background: url('/Images/dark-logo-bg.png');">Social</div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <a href="https://www.facebook.com/CaritasUniversity" target="_blank"><img src="~/Images/facebook.fw.png" /></a>
+                </div>
+                <div class="col-md-6">
+                    <a href="https://twitter.com/CaritasUniv" target="_blank"><img src="~/Images/twitter.fw.png" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $("#HomeLink").addClass("active");
+    function goTo(loc) {
+        windows.location = loc;
+    }
+</script>

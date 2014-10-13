@@ -1,0 +1,9 @@
+﻿@model Caritas.Models.News
+@{
+    ViewBag.Title = Model.Title;
+}
+<div class="container">
+    <h3>News: <span style="color:#d0040f">@Model.Title</span></h3>
+    <hr />
+    @Html.Raw(Model.News1)
+</div>

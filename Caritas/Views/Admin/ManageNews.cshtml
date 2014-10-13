@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Manage News";
+}
+<div class="container" ng-app="AdminApp" ng-controller="NewsCtrl">
+    <a href="~/Admin"><span style="font-size:40px" class="glyphicon glyphicon-arrow-left"></span></a>
+    <h3>Manage News</h3>
+    <hr />
+    <section class="col-md-8">
+        <form name="frm">
+            <input type="hidden" ng-model="newsId" />
+            <input type="hidden" value="@User.Identity.GetUserId()" id="UserId" />
+            <div class="form-group">
+                <label class="control-label">Title</label>
+                <input type="text" ng-model="title" name="title" class="form-control" required />
+                <span ng-show="frm.title.$dirty && frm.title.$error.required">Title is required</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Body</label>
+                <textarea name="body" class="form-control" ui-tinymce="tinymceOptions" ng-model="body" required></textarea>
+                <span ng-show="frm.body.$dirty && frm.body.$error.required">News Body is required</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Caption</label>
+                <textarea name="caption" class="form-control" ng-model="caption" maxlength="100" required></textarea>
+                <span ng-show="frm.caption.$dirty && frm.caption.$error.required">News Caption is required</span>
+                <span ng-show="frm.caption.$dirty && frm.caption.$error.maxlength">News Caption cannot be more than 100 characters</span>
+            </div>
+            <div class="form-group pull-right">
+                <button ng-hide="newsId" type="button" ng-disabled="frm.$invalid" class="btn btn-success" ng-click="createNews()">Add</button>
+                <div ng-show="newsId" class="btn-group">
+                    <button type="button" ng-disabled="frm.$invalid" class="btn btn-primary" ng-click="updateNews()">Update</button>
+                    <button type="button" ng-disabled="frm.$invalid" class="btn btn-danger" ng-click="deleteNews(newsId)">Delete</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="col-md-4">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Latest</div>
+            <table class="table">
+                <thead>
+                    <tr style="font-weight:bold">
+                        <td>News</td>
+                        <td>By</td>
+                        <td>Date</td>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr ng-repeat="l in latestNews">
+                        <td>{{l.Title}}</td>
+                        <td>{{l.FirstName + ' ' + l.LastName}}</td>
+                        <td>{{formatJsonDate(l.DateAdded)}}</td>
+                        <td><a ng-show="l.UserID == userid" ng-href="" class="btn" ng-click="getNewsForUpdate(l.NewsID)"><span class="glyphicon glyphicon-edit"></span>/<span class="glyphicon glyphicon-remove"></span></a></td>                       
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
